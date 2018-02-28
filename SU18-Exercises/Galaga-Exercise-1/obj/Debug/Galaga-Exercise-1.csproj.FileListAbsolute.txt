@@ -1,0 +1,10 @@
+/home/frydendal/Documents/SU/su18-MRP/SU18-Exercises/Galaga-Exercise-1/bin/Debug/Galaga_Exercise_1.exe
+/home/frydendal/Documents/SU/su18-MRP/SU18-Exercises/Galaga-Exercise-1/bin/Debug/Galaga_Exercise_1.pdb
+/home/frydendal/Documents/SU/su18-MRP/SU18-Exercises/Galaga-Exercise-1/bin/Debug/DIKUArcade.dll
+/home/frydendal/Documents/SU/su18-MRP/SU18-Exercises/Galaga-Exercise-1/bin/Debug/OpenTK.dll
+/home/frydendal/Documents/SU/su18-MRP/SU18-Exercises/Galaga-Exercise-1/bin/Debug/DIKUArcade.pdb
+/home/frydendal/Documents/SU/su18-MRP/SU18-Exercises/Galaga-Exercise-1/bin/Debug/OpenTK.xml
+/home/frydendal/Documents/SU/su18-MRP/SU18-Exercises/Galaga-Exercise-1/obj/Debug/Galaga-Exercise-1.csprojResolveAssemblyReference.cache
+/home/frydendal/Documents/SU/su18-MRP/SU18-Exercises/Galaga-Exercise-1/obj/Debug/Galaga-Exercise-1.csproj.CoreCompileInputs.cache
+/home/frydendal/Documents/SU/su18-MRP/SU18-Exercises/Galaga-Exercise-1/obj/Debug/Galaga_Exercise_1.exe
+/home/frydendal/Documents/SU/su18-MRP/SU18-Exercises/Galaga-Exercise-1/obj/Debug/Galaga_Exercise_1.pdb
