@@ -17,10 +17,15 @@ namespace Galaga_Exercise_1
         private Entity player;
         
         private GameEventBus<object> eventBus;
+
+        private ImageStride enemyStrides;
+
+        private Image laser;
         
-        private List<Image> enemyStrides;
         private EntityContainer enemies;
 
+        private EntityContainer lasers;
+        
         private GameTimer gameTimer;
 
         private Player gamePlayer;
@@ -31,6 +36,8 @@ namespace Galaga_Exercise_1
             
             win = new Window("Galaga", 500, AspectRatio.R16X9);
             gamePlayer = new Player();
+            
+            laser = new Image(Path.Combine("Assets", "Images", "BulletRed2.png"));
         
             player = new Entity(
                 new DynamicShape(new Vec2F(0.45f, 0.1f), new Vec2F(0.1f, 0.1f)),
@@ -47,12 +54,11 @@ namespace Galaga_Exercise_1
             eventBus.Subscribe(GameEventType.WindowEvent, this );
             eventBus.Subscribe(GameEventType.PlayerEvent, gamePlayer );
             
-            
            
-            enemyStrides = ImageStride.CreateStrides(4,
-                Path.Combine("Assets", "Images", "BlueMonster.png"));
+            enemyStrides = new ImageStride(100,ImageStride.CreateStrides(4,
+                Path.Combine("Assets", "Images", "BlueMonster.png")));
             enemies = new EntityContainer();
-            
+            lasers = new EntityContainer();
             gameTimer = new GameTimer(60,60);
             AddEnemies();
             
@@ -61,7 +67,16 @@ namespace Galaga_Exercise_1
         
         private void AddEnemies()
         {
-            enemies.AddDynamicEntity((new DynamicShape(0.1f,0.1f,0.1f,0.1f)),enemyStrides[0]);
+            for (int j = 0; j < 3; j++)
+            {
+                for (int i = 0; i < 8; i++)
+                {
+                    enemies.AddDynamicEntity(
+                        (new DynamicShape(0.1f + i / 10.0f, 0.9f - j / 10.0f, 0.085f, 0.085f)), new ImageStride(100,ImageStride.CreateStrides(4,
+                            Path.Combine("Assets", "Images", "BlueMonster.png"))));
+                }
+                
+            }
         }
     
         public void GameLoop()
@@ -78,8 +93,6 @@ namespace Galaga_Exercise_1
                 {
                     win.PollEvents();
                     eventBus.ProcessEvents();
-                    
-                    
                 }
 
                 
@@ -90,6 +103,7 @@ namespace Galaga_Exercise_1
                     player.Shape.Move();
                     player.RenderEntity();
                     enemies.RenderEntities();
+                    lasers.RenderEntities();
                     win.SwapBuffers();
                 }
 
@@ -109,33 +123,62 @@ namespace Galaga_Exercise_1
                 case "KEY_ESCAPE":
                     eventBus.RegisterEvent(
                             GameEventFactory<object>.CreateGameEventForAllProcessors(
-                                GameEventType.WindowEvent, this, "CLOSE_WINDOW", "KEY_PRESS", ""));
+                                GameEventType.WindowEvent, this, "CLOSE_WINDOW", "", ""));
+                    win.CloseWindow();
                     break;
-                
                 case "KEY_SPACE":
                     eventBus.RegisterEvent(
-                        GameEventFactory<object>.CreateGameEventForAllProcessors(
-                            GameEventType.InputEvent, this, "SHOOT", "KEY_PRESS", ""));
+                    GameEventFactory<object>.CreateGameEventForAllProcessors(
+                        GameEventType.WindowEvent, this, "Shoot", "", ""));
+                    
+                    lasers.AddDynamicEntity(
+                        new DynamicShape(player.Shape.Position.X+(player.Shape.Extent.X/2.0f), player.Shape.Position.Y+(player.Shape.Extent.Y/2.0f),
+                            0.008f , 0.027f ,
+                            0.0f , 0.01f),
+                            laser);
                     break;
-                case "KEY_UP":    
+                case "KEY_UP":
                     eventBus.RegisterEvent(
                         GameEventFactory<object>.CreateGameEventForAllProcessors(
-                            GameEventType.InputEvent, this, "MOVE_UP", "KEY_PRESS", ""));
+                            GameEventType.InputEvent, this, "UP", "", ""));
+                    if (player.Shape.Position.Y+0.004f >= 1.0f)
+                    {
+                        ((DynamicShape) player.Shape).Direction.Y = 0.000f;
+                    }
+                    else
+                    {      
+                        ((DynamicShape) player.Shape).Direction.Y = 0.004f;
+                    }
                     break;
                 case "KEY_DOWN":
-                    eventBus.RegisterEvent(
-                        GameEventFactory<object>.CreateGameEventForAllProcessors(
-                            GameEventType.InputEvent, this, "MOVE_DOWN", "KEY_PRESS", ""));
+                    if ( player.Shape.Position.Y-0.004f <= 0.0f)
+                    {
+                        ((DynamicShape) player.Shape).Direction.Y = 0.000f;
+                    }
+                    else
+                    {
+                        ((DynamicShape) player.Shape).Direction.Y = -0.004f;      
+                    }
                     break;
                 case "KEY_LEFT":
-                    eventBus.RegisterEvent(
-                        GameEventFactory<object>.CreateGameEventForAllProcessors(
-                            GameEventType.InputEvent, this, "MOVE_LEFT", "KEY_PRESS", ""));
+                    if (player.Shape.Position.X+0.002f > 1.0f|| player.Shape.Position.X -0.002f < 0.0f)
+                    {
+                        ((DynamicShape) player.Shape).Direction.X = 0.000f;
+                    }
+                    else
+                    {
+                        ((DynamicShape) player.Shape).Direction.X = -0.002f;      
+                    }
                     break;
                 case "KEY_RIGHT":
-                    eventBus.RegisterEvent(
-                        GameEventFactory<object>.CreateGameEventForAllProcessors(
-                            GameEventType.InputEvent, this, "MOVE_RIGHT", "KEY_PRESS", ""));
+                    if (player.Shape.Position.X+0.002f > 1.0f|| player.Shape.Position.X-0.002f < 0.0f)
+                    {
+                        ((DynamicShape) player.Shape).Direction.X = 0.000f;
+                    }
+                    else
+                    {
+                        ((DynamicShape) player.Shape).Direction.X = 0.002f;      
+                    }
                     break;
                 
             }
@@ -148,33 +191,22 @@ namespace Galaga_Exercise_1
             switch (key)
             {
                 case "KEY_SPACE":
-                    eventBus.RegisterEvent(
-                        GameEventFactory<object>.CreateGameEventForAllProcessors(
-                            GameEventType.InputEvent, this, "SHOOT", "KEY_RELEASE", ""));
+                    lasers.AddDynamicEntity(new DynamicShape(0.008f , 0.027f , 0.0f , 0.01f),laser);
                     break;
                 case "KEY_UP":
-                    eventBus.RegisterEvent(
-                        GameEventFactory<object>.CreateGameEventForAllProcessors(
-                            GameEventType.InputEvent, this, "MOVE_UP", "KEY_RELEASE", ""));
+                    ((DynamicShape) player.Shape).Direction.Y = 0.0f;
                     break;
                 case "KEY_DOWN":
-                    eventBus.RegisterEvent(
-                        GameEventFactory<object>.CreateGameEventForAllProcessors(
-                            GameEventType.InputEvent, this, "MOVE_DOWN", "KEY_RELEASE", ""));
+                    ((DynamicShape) player.Shape).Direction.Y = 0.0f;
                     break;
                 case "KEY_LEFT":
-                    eventBus.RegisterEvent(
-                        GameEventFactory<object>.CreateGameEventForAllProcessors(
-                            GameEventType.InputEvent, this, "MOVE_LEFT", "KEY_RELEASE", ""));
+                    ((DynamicShape) player.Shape).Direction.X = 0.0f;
                     break;
                 case "KEY_RIGHT":
-                    eventBus.RegisterEvent(
-                        GameEventFactory<object>.CreateGameEventForAllProcessors(
-                            GameEventType.InputEvent, this, "MOVE_RIGHT", "KEY_RELEASE", ""));
+                    ((DynamicShape) player.Shape).Direction.X = 0.0f;
                     break;
             }
-            
-            ((DynamicShape)player.Shape).Direction.X = 0.0f;            
+               
                     
         }
         
@@ -187,7 +219,6 @@ namespace Galaga_Exercise_1
                             win.CloseWindow();
                         }
                         break;
-                   
                     default:
                         break;
                 }
