@@ -9,7 +9,7 @@ using DIKUArcade.EventBus;
 
 namespace Galaga_Exercise_1
 {
-    public class Game
+    public class Game : IGameEventProcessor<object>
     {
         private Window win;
 
@@ -38,7 +38,7 @@ namespace Galaga_Exercise_1
                 });                        // e.g. move, destroy, receive health, etc.    
             win.RegisterEventBus(eventBus);
             eventBus.Subscribe(GameEventType.InputEvent, this);
-            eventBus.Subscribe(GameEventType.WindowEvent, this);
+            eventBus.Subscribe(GameEventType.WindowEvent, this );
            
             enemyStrides = ImageStride.CreateStrides(4,
                 Path.Combine("Assets", "Images", "BlueMonster.png"));
@@ -59,15 +59,15 @@ namespace Galaga_Exercise_1
             while (win.IsRunning())
             {
                 eventBus.ProcessEvents();
+                
                 win.PollEvents();
                 win.Clear();
                 
-                player.RenderEntity();
-                
-                win.SwapBuffers();
                 
                 player.Shape.Move();
                 player.RenderEntity();
+                
+                win.SwapBuffers();
                 
             }
 
@@ -85,14 +85,13 @@ namespace Galaga_Exercise_1
                       
             }    // match on e.g. "KEY_UP", "KEY_1", "KEY_A", etc.
                    // TODO: use this method to start moving your player object
-        player.Shape.Direction.X = 0.0001f; // choose a fittingly small number
+            ((DynamicShape) player.Shape).Direction.X = 0.0001f; // choose a fittingly small number
         }
 
         public void KeyRelease(string key)
         {
             // match on e.g. "KEY_UP", "KEY_1", "KEY_A", etc.
-            player.Shape.MoveX(0.0f);
-            
+            ((DynamicShape)player.Shape).Direction.X = 0.0f;            
         }
         
         public void ProcessEvent(GameEventType eventType, GameEvent<object> gameEvent) {
