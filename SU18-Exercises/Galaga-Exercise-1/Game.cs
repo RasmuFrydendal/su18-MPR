@@ -54,14 +54,14 @@ namespace Galaga_Exercise_1
             enemies = new EntityContainer();
             
             gameTimer = new GameTimer(60,60);
+            AddEnemies();
             
             
         }
         
-        private void AddEnemies() {
-            // create the desired number of enemies here. Remember:
-            // - normalised coordinates
-            // - add them to the entity containerS
+        private void AddEnemies()
+        {        
+            enemies.AddDynamicEntity(new DynamicShape(0.1f, 0.1f, 0.1f, 0.1f), enemyStrides[1]);
         }
 
 
@@ -111,33 +111,33 @@ namespace Galaga_Exercise_1
                 case "KEY_ESCAPE":
                     eventBus.RegisterEvent(
                             GameEventFactory<object>.CreateGameEventForAllProcessors(
-                                GameEventType.WindowEvent, this, "CLOSE_WINDOW", "", ""));
+                                GameEventType.WindowEvent, this, "CLOSE_WINDOW", "START", ""));
                     break;
                 
                 case "KEY_SPACE":
                     eventBus.RegisterEvent(
                         GameEventFactory<object>.CreateGameEventForAllProcessors(
-                            GameEventType.InputEvent, this, "SHOOT", "", ""));
+                            GameEventType.InputEvent, this, "SHOOT", "START", ""));
                     break;
                 case "KEY_UP":    
                     eventBus.RegisterEvent(
                         GameEventFactory<object>.CreateGameEventForAllProcessors(
-                            GameEventType.InputEvent, this, "MOVE_UP", "", ""));
+                            GameEventType.InputEvent, this, "MOVE_UP", "START", ""));
                     break;
                 case "KEY_DOWN":
                     eventBus.RegisterEvent(
                         GameEventFactory<object>.CreateGameEventForAllProcessors(
-                            GameEventType.InputEvent, this, "MOVE_DOWN", "", ""));
+                            GameEventType.InputEvent, this, "MOVE_DOWN", "START", ""));
                     break;
                 case "KEY_LEFT":
                     eventBus.RegisterEvent(
                         GameEventFactory<object>.CreateGameEventForAllProcessors(
-                            GameEventType.InputEvent, this, "MOVE_LEFT", "", ""));
+                            GameEventType.InputEvent, this, "MOVE_LEFT", "START", ""));
                     break;
                 case "KEY_RIGHT":
                     eventBus.RegisterEvent(
                         GameEventFactory<object>.CreateGameEventForAllProcessors(
-                            GameEventType.InputEvent, this, "MOVE_RIGHT", "", ""));
+                            GameEventType.InputEvent, this, "MOVE_RIGHT", "START", ""));
                     break;
                 
             }
@@ -147,7 +147,35 @@ namespace Galaga_Exercise_1
     
         public void KeyRelease(string key)
         {
-            // match on e.g. "KEY_UP", "KEY_1", "KEY_A", etc.
+            switch (key)
+            {
+                case "KEY_SPACE":
+                    eventBus.RegisterEvent(
+                        GameEventFactory<object>.CreateGameEventForAllProcessors(
+                            GameEventType.InputEvent, this, "SHOOT", "STOP", ""));
+                    break;
+                case "KEY_UP":
+                    eventBus.RegisterEvent(
+                        GameEventFactory<object>.CreateGameEventForAllProcessors(
+                            GameEventType.InputEvent, this, "MOVE_UP", "STOP", ""));
+                    break;
+                case "KEY_DOWN":
+                    eventBus.RegisterEvent(
+                        GameEventFactory<object>.CreateGameEventForAllProcessors(
+                            GameEventType.InputEvent, this, "MOVE_DOWN", "STOP", ""));
+                    break;
+                case "KEY_LEFT":
+                    eventBus.RegisterEvent(
+                        GameEventFactory<object>.CreateGameEventForAllProcessors(
+                            GameEventType.InputEvent, this, "MOVE_LEFT", "STOP", ""));
+                    break;
+                case "KEY_RIGHT":
+                    eventBus.RegisterEvent(
+                        GameEventFactory<object>.CreateGameEventForAllProcessors(
+                            GameEventType.InputEvent, this, "MOVE_RIGHT", "STOP", ""));
+                    break;
+            }
+            
             ((DynamicShape)player.Shape).Direction.X = 0.0f;            
                     
         }
@@ -156,22 +184,65 @@ namespace Galaga_Exercise_1
             if (eventType == GameEventType.WindowEvent) {
                 switch (gameEvent.Message) {
                     case "CLOSE_WINDOW":
-                        win.CloseWindow();
+                        if (gameEvent.Parameter1 == "START")
+                        {
+                            win.CloseWindow();
+                        }
+                        else
+                        {
+                            
+                        }
+
                         break;
                     case "MOVE_UP":
-                        win.CloseWindow();
+                        if (gameEvent.Parameter1 == "START")
+                        {
+                               
+                        }
+                        else
+                        {
+                            
+                        }
                         break;
                     case "MOVE_LEFT":
-                        win.CloseWindow();
+                        if (gameEvent.Parameter1 == "START")
+                        {
+                               
+                        }
+                        else
+                        {
+                            
+                        }
                         break;
                     case "MOVE_RIGHT":
-                        win.CloseWindow();
+                        if (gameEvent.Parameter1 == "START")
+                        {
+                               
+                        }
+                        else
+                        {
+                            
+                        }
                         break;
                     case "MOVE_DOWN":
-                        win.CloseWindow();
+                        if (gameEvent.Parameter1 == "START")
+                        {
+                               
+                        }
+                        else
+                        {
+                            
+                        }
                         break;
                     case "SHOOT":
-                        win.CloseWindow();
+                        if (gameEvent.Parameter1 == "START")
+                        {
+                               
+                        }
+                        else
+                        {
+                            
+                        }
                         break;
                     default:
                         break;
