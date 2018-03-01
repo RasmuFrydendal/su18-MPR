@@ -29,7 +29,7 @@ namespace Galaga_Exercise_1
         {
 
             
-            win = new Window("Galaga", 500, AspectRatio.R1X1);
+            win = new Window("Galaga", 500, AspectRatio.R16X9);
             gamePlayer = new Player();
         
             player = new Entity(
@@ -60,12 +60,10 @@ namespace Galaga_Exercise_1
         }
         
         private void AddEnemies()
-        {        
-            enemies.AddDynamicEntity(new DynamicShape(0.1f, 0.1f, 0.1f, 0.1f), enemyStrides[1]);
+        {
+            enemies.AddDynamicEntity((new DynamicShape(0.1f,0.1f,0.1f,0.1f)),enemyStrides[0]);
         }
-
-
-
+    
         public void GameLoop()
         {
             while (win.IsRunning())
@@ -81,17 +79,17 @@ namespace Galaga_Exercise_1
                     win.PollEvents();
                     eventBus.ProcessEvents();
                     
+                    
                 }
 
                 
                 //Render
                 if (gameTimer.ShouldRender())
                 {
-                    win.Clear();
-                        
+                    win.Clear();    
                     player.Shape.Move();
                     player.RenderEntity();
-                    
+                    enemies.RenderEntities();
                     win.SwapBuffers();
                 }
 
@@ -111,38 +109,38 @@ namespace Galaga_Exercise_1
                 case "KEY_ESCAPE":
                     eventBus.RegisterEvent(
                             GameEventFactory<object>.CreateGameEventForAllProcessors(
-                                GameEventType.WindowEvent, this, "CLOSE_WINDOW", "START", ""));
+                                GameEventType.WindowEvent, this, "CLOSE_WINDOW", "KEY_PRESS", ""));
                     break;
                 
                 case "KEY_SPACE":
                     eventBus.RegisterEvent(
                         GameEventFactory<object>.CreateGameEventForAllProcessors(
-                            GameEventType.InputEvent, this, "SHOOT", "START", ""));
+                            GameEventType.InputEvent, this, "SHOOT", "KEY_PRESS", ""));
                     break;
                 case "KEY_UP":    
                     eventBus.RegisterEvent(
                         GameEventFactory<object>.CreateGameEventForAllProcessors(
-                            GameEventType.InputEvent, this, "MOVE_UP", "START", ""));
+                            GameEventType.InputEvent, this, "MOVE_UP", "KEY_PRESS", ""));
                     break;
                 case "KEY_DOWN":
                     eventBus.RegisterEvent(
                         GameEventFactory<object>.CreateGameEventForAllProcessors(
-                            GameEventType.InputEvent, this, "MOVE_DOWN", "START", ""));
+                            GameEventType.InputEvent, this, "MOVE_DOWN", "KEY_PRESS", ""));
                     break;
                 case "KEY_LEFT":
                     eventBus.RegisterEvent(
                         GameEventFactory<object>.CreateGameEventForAllProcessors(
-                            GameEventType.InputEvent, this, "MOVE_LEFT", "START", ""));
+                            GameEventType.InputEvent, this, "MOVE_LEFT", "KEY_PRESS", ""));
                     break;
                 case "KEY_RIGHT":
                     eventBus.RegisterEvent(
                         GameEventFactory<object>.CreateGameEventForAllProcessors(
-                            GameEventType.InputEvent, this, "MOVE_RIGHT", "START", ""));
+                            GameEventType.InputEvent, this, "MOVE_RIGHT", "KEY_PRESS", ""));
                     break;
                 
             }
                    
-            ((DynamicShape) player.Shape).Direction.X = 0.0001f; // choose a fittingly small number
+             // choose a fittingly small number
         }
     
         public void KeyRelease(string key)
@@ -152,27 +150,27 @@ namespace Galaga_Exercise_1
                 case "KEY_SPACE":
                     eventBus.RegisterEvent(
                         GameEventFactory<object>.CreateGameEventForAllProcessors(
-                            GameEventType.InputEvent, this, "SHOOT", "STOP", ""));
+                            GameEventType.InputEvent, this, "SHOOT", "KEY_RELEASE", ""));
                     break;
                 case "KEY_UP":
                     eventBus.RegisterEvent(
                         GameEventFactory<object>.CreateGameEventForAllProcessors(
-                            GameEventType.InputEvent, this, "MOVE_UP", "STOP", ""));
+                            GameEventType.InputEvent, this, "MOVE_UP", "KEY_RELEASE", ""));
                     break;
                 case "KEY_DOWN":
                     eventBus.RegisterEvent(
                         GameEventFactory<object>.CreateGameEventForAllProcessors(
-                            GameEventType.InputEvent, this, "MOVE_DOWN", "STOP", ""));
+                            GameEventType.InputEvent, this, "MOVE_DOWN", "KEY_RELEASE", ""));
                     break;
                 case "KEY_LEFT":
                     eventBus.RegisterEvent(
                         GameEventFactory<object>.CreateGameEventForAllProcessors(
-                            GameEventType.InputEvent, this, "MOVE_LEFT", "STOP", ""));
+                            GameEventType.InputEvent, this, "MOVE_LEFT", "KEY_RELEASE", ""));
                     break;
                 case "KEY_RIGHT":
                     eventBus.RegisterEvent(
                         GameEventFactory<object>.CreateGameEventForAllProcessors(
-                            GameEventType.InputEvent, this, "MOVE_RIGHT", "STOP", ""));
+                            GameEventType.InputEvent, this, "MOVE_RIGHT", "KEY_RELEASE", ""));
                     break;
             }
             
@@ -184,66 +182,12 @@ namespace Galaga_Exercise_1
             if (eventType == GameEventType.WindowEvent) {
                 switch (gameEvent.Message) {
                     case "CLOSE_WINDOW":
-                        if (gameEvent.Parameter1 == "START")
+                        if (gameEvent.Parameter1 == "KEY_PRESS")
                         {
                             win.CloseWindow();
                         }
-                        else
-                        {
-                            
-                        }
-
                         break;
-                    case "MOVE_UP":
-                        if (gameEvent.Parameter1 == "START")
-                        {
-                               
-                        }
-                        else
-                        {
-                            
-                        }
-                        break;
-                    case "MOVE_LEFT":
-                        if (gameEvent.Parameter1 == "START")
-                        {
-                               
-                        }
-                        else
-                        {
-                            
-                        }
-                        break;
-                    case "MOVE_RIGHT":
-                        if (gameEvent.Parameter1 == "START")
-                        {
-                               
-                        }
-                        else
-                        {
-                            
-                        }
-                        break;
-                    case "MOVE_DOWN":
-                        if (gameEvent.Parameter1 == "START")
-                        {
-                               
-                        }
-                        else
-                        {
-                            
-                        }
-                        break;
-                    case "SHOOT":
-                        if (gameEvent.Parameter1 == "START")
-                        {
-                               
-                        }
-                        else
-                        {
-                            
-                        }
-                        break;
+                   
                     default:
                         break;
                 }
