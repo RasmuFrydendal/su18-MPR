@@ -6,6 +6,7 @@ using DIKUArcade.Entities;
 using DIKUArcade.Graphics;
 using DIKUArcade.Math;
 using DIKUArcade.EventBus;
+using DIKUArcade.Timers;
 
 namespace Galaga_Exercise_1
 {
@@ -19,6 +20,9 @@ namespace Galaga_Exercise_1
         
         private List<Image> enemyStrides;
         private EntityContainer enemies;
+
+        private GameTimer gameTimer;
+        
         
         public Game()
         {
@@ -44,6 +48,8 @@ namespace Galaga_Exercise_1
                 Path.Combine("Assets", "Images", "BlueMonster.png"));
             enemies = new EntityContainer();
             
+            gameTimer = new GameTimer(60,60);
+            
         }
         
         private void AddEnemies() {
@@ -58,17 +64,36 @@ namespace Galaga_Exercise_1
         {
             while (win.IsRunning())
             {
-                eventBus.ProcessEvents();
                 
-                win.PollEvents();
-                win.Clear();
+                //Timer
+                gameTimer.MeasureTime();
                 
                 
-                player.Shape.Move();
-                player.RenderEntity();
+                //EventUpdate
+                while (gameTimer.ShouldUpdate())
+                {
+                    win.PollEvents();
+                    eventBus.ProcessEvents();
+                    
+                }
+
                 
-                win.SwapBuffers();
-                
+                //Render
+                if (gameTimer.ShouldRender())
+                {
+                    win.Clear();
+                    
+                    player.Shape.Move();
+                    player.RenderEntity();
+                    
+                    win.SwapBuffers();
+                }
+
+                if (gameTimer.ShouldReset())
+                {
+                    win.Title = "Galaga | UPS: " + gameTimer.CapturedUpdates +
+                                ", FPS: " + gameTimer.CapturedFrames;
+                }
             }
 
 
