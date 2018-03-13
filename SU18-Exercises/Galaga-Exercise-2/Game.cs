@@ -26,6 +26,7 @@ namespace Galaga_Exercise_2
         //Squadrons
         private Squad squad;
         private Boss boss;
+        private Invasion invasion;
         //Strides
         
         //Movement
@@ -58,12 +59,16 @@ namespace Galaga_Exercise_2
             squadronContainer = new List<ISquadron>();
             
               //Squadrons
-            squad = new Squad();
+            /*squad = new Squad();
             squad.CreateEnemies(ImageStride.CreateStrides(4,
                 Path.Combine("Assets", "Images", "BlueMonster.png")));
             
             boss = new Boss();
             boss.CreateEnemies(ImageStride.CreateStrides(4,
+                Path.Combine("Assets", "Images", "BlueMonster.png")));*/
+            
+            invasion = new Invasion();
+            invasion.CreateEnemies(ImageStride.CreateStrides(4,
                 Path.Combine("Assets", "Images", "BlueMonster.png")));
 
             
