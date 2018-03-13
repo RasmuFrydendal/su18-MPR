@@ -40,10 +40,9 @@ namespace Galaga_Exercise_2.Squadrons {
             
             for (int i = 0; i < positionList.Count; i++) {
                 enemystride = new ImageStride(60,enemyStrides);
-                Vec2F position = positionList[i];    
+                Vec2F position = positionList[i];
                 Enemies.AddDynamicEntity(new Enemy(new StationaryShape(position,Squad.size),enemystride));
             }
-            
         }
 
         
@@ -55,16 +54,12 @@ namespace Galaga_Exercise_2.Squadrons {
             float offset = 0.0f;
             int line = 1;
             
-            
-
-            
             if (Squad.enemiesOnRow % 2 == 0) {
                 offset = -(Squad.room / 2);
             } 
             else {
                 offset = -(Squad.size.X / 2);
             }
-
 
             while (line*Squad.enemiesOnRow < MaxEnemies+Squad.enemiesOnRow) {
                 
@@ -79,7 +74,6 @@ namespace Galaga_Exercise_2.Squadrons {
 
                 line += 1;
             }
-
             
             return list;
         }

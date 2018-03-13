@@ -51,7 +51,7 @@
     <Compile Include="Squadrons\Boss.cs" />
     <Compile Include="Squadrons\ISquadron.cs" />
     <Compile Include="Squadrons\Squad.cs" />
-    <Compile Include="Squadrons\Zerg.cs" />
+    <Compile Include="Squadrons\Invasion.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\DIKUArcade\DIKUArcade\DIKUArcade.csproj">

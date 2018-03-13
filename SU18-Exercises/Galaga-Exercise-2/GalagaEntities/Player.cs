@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using DIKUArcade;
 using DIKUArcade.Entities;
 using DIKUArcade.EventBus;
 using DIKUArcade.Graphics;
@@ -115,7 +116,7 @@ namespace Galaga_Exercise_2.GalagaEntities
         
         public void Update()
         {
-            if (WithinBounds()) {
+            if (WithinBounds().Item1 && WithinBounds().Item2) {
                 player.Shape.Move();
             }
             player.RenderEntity();
