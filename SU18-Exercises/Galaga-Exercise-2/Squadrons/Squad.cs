@@ -64,7 +64,7 @@ namespace Galaga_Exercise_2.Squadrons {
             while (line*Squad.enemiesOnRow < MaxEnemies+Squad.enemiesOnRow) {
                 
                     for (int i = 1; i <= Squad.enemiesOnRow; i++) {
-                        float xPos = (Squad.center + (float)Math.Floor(i/2.0f) * (Squad.size.X + Squad.room) * direction) + offset;
+                        float xPos = Squad.center + (float)Math.Floor(i/2.0f) * (Squad.size.X + Squad.room) * direction + offset;
                         float yPos = 1.0f-line*(Squad.size.Y+Squad.room);
                         
                         list.Add(new Vec2F(xPos,yPos));

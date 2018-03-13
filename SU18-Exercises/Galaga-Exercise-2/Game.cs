@@ -59,22 +59,23 @@ namespace Galaga_Exercise_2
             squadronContainer = new List<ISquadron>();
             
               //Squadrons
-            /*squad = new Squad();
-            squad.CreateEnemies(ImageStride.CreateStrides(4,
-                Path.Combine("Assets", "Images", "BlueMonster.png")));
+//            squad = new Squad();
+//            squad.CreateEnemies(ImageStride.CreateStrides(4,
+//                Path.Combine("Assets", "Images", "BlueMonster.png")));
             
-            boss = new Boss();
-            boss.CreateEnemies(ImageStride.CreateStrides(4,
-                Path.Combine("Assets", "Images", "BlueMonster.png")));*/
-            
+//            boss = new Boss();
+//            boss.CreateEnemies(ImageStride.CreateStrides(4,
+//                Path.Combine("Assets", "Images", "BlueMonster.png")));
+                
             invasion = new Invasion();
             invasion.CreateEnemies(ImageStride.CreateStrides(4,
                 Path.Combine("Assets", "Images", "BlueMonster.png")));
 
             
             //Add to enemies
-            squadronContainer.Add(squad);
-            squadronContainer.Add(boss);
+//            squadronContainer.Add(squad); 
+//            squadronContainer.Add(boss);
+            squadronContainer.Add(invasion);
             
             
             //Explosiom

@@ -10,18 +10,16 @@ namespace Galaga_Exercise_2.GalagaEntities {
         public int Health { get; private set; }
         public int Damage { get; }
 
-        public Enemy(StationaryShape shape, IBaseImage image) : this(shape, image,
-            30, 30) { }
+        public Enemy(StationaryShape shape, IBaseImage image) : this(shape, image, 30, 30) { }
 
-        public Enemy(StationaryShape shape, IBaseImage image, int health,
-            int damage) : base(shape, image) {
+        public Enemy(StationaryShape shape, IBaseImage image, int health, int damage) : base(shape, image) {
             Health = health;
             Damage = damage;
             StartPos = shape.Position.Copy();
         }
 
         public void TakeDamage(int dmg) {
-            Health -= dmg;
+            Health -= dmg * 3;
             if (Health <= 0) {
                 DeleteEntity();
             }

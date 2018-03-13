@@ -67,12 +67,11 @@ namespace Galaga_Exercise_2.Squadrons {
 
                 for (int i = 1; i <= enemiesPerRow[j]; i++) {
 
-                    float xPos = Invasion.leftAlign + (float) Math.Floor(i / 2.0f) * (Invasion.size.X + Invasion.room) * direction + offset;
+                    float xPos = Invasion.leftAlign + i * (Invasion.size.X + Invasion.room);
                     float yPos = 1.0f - line * (Invasion.size.Y + Invasion.room);
 
                     list.Add(new Vec2F(xPos, yPos));
 
-                    direction *= -1;
                 }
                 line += 1;
             }
