@@ -10,7 +10,7 @@ namespace Galaga_Exercise_2.GalagaEntities {
         public int Health { get; private set; }
         public int Damage { get; }
 
-        public Enemy(StationaryShape shape, IBaseImage image) : this(shape, image, 30, 30) { }
+        public Enemy(StationaryShape shape, IBaseImage image) : this(shape, image, 10, 10) { }
 
         public Enemy(StationaryShape shape, IBaseImage image, int health, int damage) : base(shape, image) {
             Health = health;
@@ -19,7 +19,7 @@ namespace Galaga_Exercise_2.GalagaEntities {
         }
 
         public void TakeDamage(int dmg) {
-            Health -= dmg * 3;
+            Health -= dmg;
             if (Health <= 0) {
                 DeleteEntity();
             }
