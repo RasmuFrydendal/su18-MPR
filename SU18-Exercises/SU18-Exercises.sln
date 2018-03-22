@@ -4,6 +4,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Galaga-Exercise-1", "Galaga
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DIKUArcade", "..\DIKUArcade\DIKUArcade\DIKUArcade.csproj", "{A1E4E4DF-0967-4096-9E3C-FBC29B7D07DD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Galaga-Exercise-2", "Galaga-Exercise-2\Galaga-Exercise-2.csproj", "{19767986-4CDA-4A7B-98BF-F1CBF2F613A2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Galaga-Exercise-3", "Galaga-Exercise-3\Galaga-Exercise-3.csproj", "{FBBFAEF7-8305-4D01-AC5B-315ABEFCAE14}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +22,13 @@ Global
 		{A1E4E4DF-0967-4096-9E3C-FBC29B7D07DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A1E4E4DF-0967-4096-9E3C-FBC29B7D07DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A1E4E4DF-0967-4096-9E3C-FBC29B7D07DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19767986-4CDA-4A7B-98BF-F1CBF2F613A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19767986-4CDA-4A7B-98BF-F1CBF2F613A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19767986-4CDA-4A7B-98BF-F1CBF2F613A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19767986-4CDA-4A7B-98BF-F1CBF2F613A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FBBFAEF7-8305-4D01-AC5B-315ABEFCAE14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FBBFAEF7-8305-4D01-AC5B-315ABEFCAE14}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FBBFAEF7-8305-4D01-AC5B-315ABEFCAE14}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FBBFAEF7-8305-4D01-AC5B-315ABEFCAE14}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

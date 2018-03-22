@@ -1,0 +1,16 @@
+﻿<Properties StartupConfiguration="{6EBB7213-83A7-43E8-B7C8-398FBA352054}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="../DIKUArcade/DIKUArcade/Graphics/ImageStride.cs">
+    <Files>
+      <File FileName="../DIKUArcade/DIKUArcade/Entities/Entity.cs" Line="1" Column="1" />
+      <File FileName="Galaga-Exercise-1/Game.cs" Line="47" Column="52" />
+      <File FileName="../DIKUArcade/DIKUArcade/Graphics/ImageStride.cs" Line="119" Column="60" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.Galaga-Exercise-1 PreferredExecutionTarget="MonoDevelop.Default" />
+</Properties>
