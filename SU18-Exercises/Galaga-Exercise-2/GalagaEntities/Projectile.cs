@@ -18,21 +18,24 @@ namespace Galaga_Exercise_2.GalagaEntities {
             int enemyHealth = enemy.Health;
             enemy.TakeDamage(Damage);
             Damage -= enemyHealth;
-            if (Damage <= 0) {
-                DeleteEntity();
-            }
+            
+            DeleteEntity();
+            
         }
         
-        private static EntityContainer<Enemy>.IteratorMethod delete = delegate(Enemy enemy) {  };
+        private static EntityContainer<Projectile>.IteratorMethod delete = delegate(Projectile projectile) {  };
+        private static EntityContainer<Enemy>.IteratorMethod deleteE = delegate(Enemy enemy) {  };
 
+        
         public static void IterateShot(EntityContainer<Projectile> projectiles,
             List<ISquadron> squads) {
             foreach (Projectile projectile in projectiles) {
+                
                 projectile.Shape.Move();
                 if (projectile.Shape.Position.Y > 1.0f) {
                     projectile.DeleteEntity();
                 }
-
+                
                 foreach (ISquadron squad in squads) {
                     EntityContainer<Enemy> enemies = squad.Enemies;
                     foreach (Enemy enemy in enemies) {
@@ -41,10 +44,10 @@ namespace Galaga_Exercise_2.GalagaEntities {
                                 enemy.Shape);
                         if (collision.Collision) {
                             projectile.DealDamage(enemy);
-                            break;
                         }
-                    enemies.Iterate(Projectile.delete);
+                        projectiles.Iterate(Projectile.delete);
                     }
+                    enemies.Iterate(Projectile.deleteE);
                 }
             }
         }
