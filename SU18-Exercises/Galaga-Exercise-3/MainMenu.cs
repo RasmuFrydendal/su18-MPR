@@ -17,14 +17,16 @@ namespace Galaga_Exercise_3 {
         Game game = new Game();
         
         public void GameLoop() {
+            
             RenderState();
+
         }
 
         public void InitializeGameState() {
             
             backgroundImage = 
                 new Entity(new StationaryShape(new Vec2F(0,0), new Vec2F(1,1)), 
-                    new Image( "TitleImage.png"));
+                    new Image( "Assets\\Images\\TitleImage.png"));
             
             menuButtons = new Text[]{
                 new Text(
@@ -49,6 +51,7 @@ namespace Galaga_Exercise_3 {
             backgroundImage.RenderEntity();
 
             
+
         }
 
         public void HandleKeyEvent(string keyValue, string keyAction) {
