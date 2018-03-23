@@ -15,8 +15,8 @@ namespace Galaga_Exercise_3
     public class Game : IGameEventProcessor<object>
     {
         private Window win;
-        
         private GameEventBus<object> eventBus;
+        private StateMachine state;
         
         
         //Enemies
@@ -45,9 +45,8 @@ namespace Galaga_Exercise_3
         
         public Game()
         {
-
             win = new Window("Galaga", 500, AspectRatio.R16X9);
-
+            state = new StateMachine();
             
             //Player
             player = new Player();
@@ -117,24 +116,26 @@ namespace Galaga_Exercise_3
                 {
                     win.PollEvents();
                     eventBus.ProcessEvents();
+                    state.ActiveState.UpdateGameLogic();
                 }
-
 
                 //Render
                 if (gameTimer.ShouldRender())
                 {
                     win.Clear();
                     
-                    foreach (var squadron in squadronContainer) {
-                        squadron.Move();
-                        squadron.Enemies.RenderEntities();    
-                    }
-
-                    Projectile.IterateShot(player.Projectiles,squadronContainer);
+                    state.ActiveState.RenderState();
                     
-                    explosions.RenderAnimations();
-                    
-                    player.Update();
+//                    foreach (var squadron in squadronContainer) {
+//                        squadron.Move();
+//                        squadron.Enemies.RenderEntities();    
+//                    }
+//
+//                    Projectile.IterateShot(player.Projectiles,squadronContainer);
+//                    
+//                    explosions.RenderAnimations();
+//                    
+//                    player.Update();
                     
                     win.SwapBuffers();
                 }
