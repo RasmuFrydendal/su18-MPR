@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Galaga_Exercise_3</RootNamespace>
     <AssemblyName>Galaga_Exercise_3</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <LangVersion>6</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -35,15 +36,19 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GalagaBus.cs" />
     <Compile Include="GalagaEntities\Enemy.cs" />
     <Compile Include="GalagaEntities\Player.cs" />
     <Compile Include="GalagaEntities\Projectile.cs" />
+    <Compile Include="GalagaState\GalagaStateTypes.cs" />
+    <Compile Include="GalagaState\GameRunning.cs" />
+    <Compile Include="GalagaState\MainMenu.cs" />
+    <Compile Include="GalagaState\StateMachine.cs" />
     <Compile Include="Game.cs" />
-    <Compile Include="GameStateType.cs" />
-    <Compile Include="MainMenu.cs" />
     <Compile Include="MovementStrategy\Down.cs" />
     <Compile Include="MovementStrategy\IMovementStrategy.cs" />
     <Compile Include="MovementStrategy\NoMove.cs" />
